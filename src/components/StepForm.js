@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Feedback from './Feedback';
 
 class StepForm extends Component {
@@ -29,7 +30,7 @@ class StepForm extends Component {
 
   onChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
 
     this.setState({
@@ -50,14 +51,19 @@ class StepForm extends Component {
             <textarea name="content" value={this.state.content} onChange={this.onChange}/>
           </div>
           <button>Submit</button>
+          <span className="remove-step" onClick={this.removeStep}>or remove last step</span>
         </form>
-        <button onClick={this.removeStep}>Remove last step</button>
         {this.state.feedback &&
           <Feedback feedback={this.state.feedback} />
         }
       </div>
     )
   }
+}
+
+StepForm.propTypes = {
+  addStep: PropTypes.func.isRequired,
+  removeStep: PropTypes.func.isRequired
 }
 
 export default StepForm;

@@ -54,6 +54,23 @@
   border-color: #5543db;
 }
 
+button {
+  background: white;
+  border: 5px solid #5543db;
+  border-radius: 0;
+  color: #5543db;
+  outline: 0;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.remove-step {
+  color: #5543db;
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: underline;
+}
+
 .step-header {
   bottom: 30px;
   position: absolute;
@@ -71,12 +88,15 @@
 }
 
 .step-form {
-  margin-top: 50px;
+  margin-top: 50px 0;
   text-align: left;
   width: 100%;
 }
 
 .step-form input , .step-form textarea{
+  border: 3px solid #5543db;
+  outline: none;
+  padding: 10px;
   width: 100%;
 }
 .step-form textarea {
@@ -100,7 +120,8 @@
   background-color: rgba(255,229,100,0.3);
   border-left: 5px solid #ffe364;
   display: block;
-  margin: 50px 0;
+  margin: 10px 0;
   padding: 10px;
+  text-align: center;
   width: 100%;
 }

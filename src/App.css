@@ -29,6 +29,12 @@
   width: 500px;
 }
 
+@media screen and (max-width: 600px) {
+  .app-content {
+    padding: 0 50px;
+  }
+}
+
 .app-intro {
   font-size: large;
 }

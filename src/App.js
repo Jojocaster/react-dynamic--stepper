@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Stepper from 'components/Stepper';
-import StepForm from 'components/StepForm';
-import StepContent from 'components/StepContent';
-import Feedback from 'components/Feedback';
+import Stepper from './components/Stepper';
+import StepForm from './components/StepForm';
+import StepContent from './components/StepContent';
+import Feedback from './components/Feedback';
 
 class App extends Component {
   constructor(props) {
@@ -13,10 +13,12 @@ class App extends Component {
     this.state = {
       steps: [
         {
+          id: 0,
           title: 'Welcome',
           content: 'First step'
         },
         {
+          id: 1,
           title: 'Step two',
           content: 'The second one.'
         }
@@ -30,35 +32,34 @@ class App extends Component {
     this.removeStep = this.removeStep.bind(this);
   }
 
-  onStepClick(i) {
+  onStepClick(id) {
     //If the difference between to tasks if greater than 1, we don't do anything
-    const stepGap = Math.abs(i - this.state.activeStep);
+    const stepGap = Math.abs(id - this.state.activeStep);
     if(stepGap > 1) {
       this.setState({feedback: 'Sorry, one step at the time.'});
     } else {
-      this.setState({activeStep: i, feedback: ''});
+      this.setState({activeStep: id, feedback: ''});
     }
   }
 
   addStep(step) {
     const steps = this.state.steps;
     if(steps.length >= this.state.config.min && steps.length < this.state.config.max) {
-      steps.push(step);
-      this.setState({steps, feedback: ''});
+      step.id = steps.length;
+      this.setState({steps: [...steps, step], feedback: ''});
     } else {
       this.setState({feedback: `Sorry, there's a maximum of 5 steps :)`});
     }
   }
 
   removeStep() {
-    if(this.state.steps.length > 2) {
+    if(this.state.steps.length > this.state.config.min) {
       const steps = this.state.steps.filter((step, i) => {
         return i !== this.state.steps.length - 1 
       });
 
-      //If active step is removed, we set the last step as the active one
+      //If active step is removed, we set the one before as the active one
       const activeStep = this.state.activeStep === steps.length ? steps.length -1 : this.state.activeStep;
-
       this.setState({steps, activeStep, feedback: ''});
     } else {
       this.setState({feedback: `The minimum amount of steps is 2, sorry !`})
@@ -73,7 +74,7 @@ class App extends Component {
           <h1 className="app-title">Welcome to React Stepper</h1>
         </header>
         <div className="app-content">
-          <Stepper {...this.state} onStepClick={(i) => this.onStepClick.bind(this, i)}/>
+          <Stepper {...this.state} onStepClick={(id) => this.onStepClick.bind(this, id)}/>
           <StepContent {...this.state}/>
           <StepForm addStep={this.addStep} removeStep={this.removeStep}/>
           {this.state.feedback &&

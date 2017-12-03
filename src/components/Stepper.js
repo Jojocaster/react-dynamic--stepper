@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import './stepper.css';
-import Step from 'components/Step';
+import Step from './Step';
 
 const StepBar = ({width}) => (
   <span className="stepbar" style={{width: width + '%'}}/>
@@ -11,7 +12,7 @@ const StepBar = ({width}) => (
 const Stepper = ({steps, activeStep, onStepClick}) => {
 
   const stepList = steps.map((step, i) => (
-    <Step step={step} index={i} key={i} width={100 / (steps.length - 1)} activeStep={activeStep} onStepClick={onStepClick}/>
+    <Step step={step} key={step.id} width={100 / (steps.length - 1)} activeStep={activeStep} onStepClick={onStepClick}/>
   ));
 
   return (
@@ -22,6 +23,18 @@ const Stepper = ({steps, activeStep, onStepClick}) => {
       </ReactCSSTransitionGroup>
     </div>
   )
+}
+
+Stepper.propTypes = {
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
+  activeStep: PropTypes.number.isRequired,
+  onStepClick: PropTypes.func.isRequired
 }
 
 export default Stepper;
