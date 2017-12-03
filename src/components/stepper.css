@@ -1,0 +1,106 @@
+.stepper {
+  background-color:#ecf0f1;
+  height: 5px;
+  position: relative;
+  width: 100%;
+}
+
+.stepbar {
+  background-color: #5543db;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: width 0.2s cubic-bezier(0.4, 0.0, 1, 1);
+  width: 0;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: all .2s .2s ease;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0;
+  transition: all .1s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+.step {
+  background-color: white;
+  border: 6px solid #ecf0f1;
+  border-radius: 50%;
+  color:#ecf0f1;
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all .2s cubic-bezier(0.4, 0.0, 1, 1);
+  width: 24px;
+}
+
+.step.active {
+  color: #5543db;
+  border-color: #5543db;
+}
+
+.step-header {
+  bottom: 30px;
+  position: absolute;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100px;
+}
+
+.step-content {
+  background-color: #ecf0f1;
+  border-left: 5px solid #5543db;
+  margin: 50px 0;
+  padding: 10px;
+  width: 100%;
+}
+
+.step-form {
+  margin-top: 50px;
+  text-align: left;
+  width: 100%;
+}
+
+.step-form input , .step-form textarea{
+  width: 100%;
+}
+.step-form textarea {
+  height: 100px;
+}
+
+.form-group {
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+}
+
+.step-form label {
+  font-size: 12px;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.feedback {
+  background-color: rgba(255,229,100,0.3);
+  border-left: 5px solid #ffe364;
+  display: block;
+  margin: 50px 0;
+  padding: 10px;
+  width: 100%;
+}
