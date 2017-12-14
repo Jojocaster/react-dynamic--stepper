@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Feedback from './Feedback';
 
 class StepForm extends Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class StepForm extends Component {
       this.props.addStep(this.state);
       this.setState({title: '', content: '', feedback: ''});
     } else {
-      this.setState({feedback: 'A step requires a title and some content.'});
+      this.props.addFeedback({feedback: 'A step requires a title and some content.'});
     }
 
     event.preventDefault();
@@ -53,9 +52,6 @@ class StepForm extends Component {
           <button>Submit</button>
           <span className="remove-step" onClick={this.removeStep}>or remove last step</span>
         </form>
-        {this.state.feedback &&
-          <Feedback feedback={this.state.feedback} />
-        }
       </div>
     )
   }

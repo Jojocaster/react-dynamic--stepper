@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Stepper from './components/Stepper';
-import StepForm from './components/StepForm';
-import StepContent from './components/StepContent';
-import Feedback from './components/Feedback';
+import Stepper from './components/Stepper/Stepper';
+import StepForm from './components/Stepper/StepForm';
+import StepContent from './components/Stepper/StepContent';
+import Feedback from './components/Feedback/Feedback';
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends Component {
         },
         {
           id: 1,
-          title: 'Step two',
+          title: 'Second step',
           content: 'The second one.'
         }
       ],
@@ -30,6 +30,7 @@ class App extends Component {
 
     this.addStep = this.addStep.bind(this);
     this.removeStep = this.removeStep.bind(this);
+    this.addFeedback = this.addFeedback.bind(this);
   }
 
   onStepClick(id) {
@@ -66,6 +67,10 @@ class App extends Component {
     }
   }
 
+  addFeedback({feedback}) {
+    this.setState({feedback});
+  }
+
   render() {
     return (
       <div className="app">
@@ -76,7 +81,9 @@ class App extends Component {
         <div className="app-content">
           <Stepper {...this.state} onStepClick={(id) => this.onStepClick.bind(this, id)}/>
           <StepContent {...this.state}/>
-          <StepForm addStep={this.addStep} removeStep={this.removeStep}/>
+          {this.state.steps.length &&
+            <StepForm addStep={this.addStep} addFeedback={this.addFeedback} removeStep={this.removeStep}/>
+          }
           {this.state.feedback &&
             <Feedback feedback={this.state.feedback} />
           }
